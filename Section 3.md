@@ -150,7 +150,7 @@ FROM Visit_flag
 GROUP BY order_date; 
 ```
 
-| Date     |  New_Cust  | Repeat_Cust |
+| Order_Date     |  New_Cust  | Repeat_Cust |
 |----------|-------------|----------|
 | 2022-01-01  |  3       |  0     |
 | 2022-01-02  |  2       |  1     |
