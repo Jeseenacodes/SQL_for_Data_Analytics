@@ -157,7 +157,22 @@ GROUP BY order_date;
 | 2022-01-03  |  1       |   2    |
 
 
+Solution:
+```sql
+WITH first_visit AS (
 
+    SELECT customer_id, MIN(order_date) AS first_visit_date
+    FROM customer_orders
+    GROUP BY customer_id
+)
+
+SELECT co.order_date,
+       SUM(CASE WHEN co.order_date = fv.first_visit_date THEN 1 ELSE 0 END) AS new_customers,
+       SUM(CASE WHEN co.order_date != fv.first_visit_date THEN 1 ELSE 0 END) AS repeat_customers
+FROM customer_orders co
+INNER JOIN first_visit fv ON co.customer_id = fv.customer_id
+GROUP BY co.order_date;
+```
 
 
 
